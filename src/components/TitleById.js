@@ -1,44 +1,45 @@
-import React from 'react';
-import { useQuery, gql } from '@apollo/client';
-
-const GET_TITLE_BY_ID = gql`
-  query titleById {
-    title(id: "tt0944947") {
-      id
-      type
-      primary_title
-      original_title
-      start_year
-      end_year
-      runtime_minutes
-      plot
-      rating {
-        aggregate_rating
-        votes_count
-      }
-      genres
-      posters {
-        url
-        width
-        height
-      }
-    }
-  }
-`;
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const TitleById = () => {
-  const { loading, error, data } = useQuery(GET_TITLE_BY_ID);
+    const [titleData, setTitleData] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error :(</p>;
+    const fetchTitleById = async (id) => {
+        const options = {
+            method: 'GET',
+            url: `https://imdb-movies-web-series-etc-search.p.rapidapi.com/${id}.json`,
+            headers: {
+                'x-rapidapi-key': 'f2bbb5b1a3msh7d83c14ad42bc40p1625f7jsn1b8d7d32e5a8',
+                'x-rapidapi-host': 'imdb-movies-web-series-etc-search.p.rapidapi.com'
+            }
+        };
 
-  return (
-    <div>
-      <h1>{data.title.primary_title}</h1>
-      <p>{data.title.plot}</p>
-      {/* Display other data as needed */}
-    </div>
-  );
+        try {
+            const response = await axios.request(options);
+            setTitleData(response.data);
+            setLoading(false);
+        } catch (error) {
+            setError(error.message);
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchTitleById('tt0944947'); // Example ID for demonstration
+    }, []);
+
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error: {error}</p>;
+
+    return (
+        <div>
+            <h1>{titleData?.title?.primary_title}</h1>
+            <p>{titleData?.title?.plot}</p>
+            {/* Display other data as needed */}
+        </div>
+    );
 };
 
 export default TitleById;
