@@ -3,7 +3,7 @@ import TitleById from './components/TitleById';
 import axios from 'axios';
 
 const App = () => {
-    const [movies, setMovies] = useState(null); // Initialize as null
+    const [movies, setMovies] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -20,7 +20,7 @@ const App = () => {
         try {
             const response = await axios.request(options);
             console.log(response.data); // Log the response to check its structure
-            setMovies(response.data);
+            setMovies(response.data.d); // Access the 'd' array from the response
             setLoading(false);
         } catch (error) {
             setError(error.message);
@@ -35,18 +35,14 @@ const App = () => {
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error}</p>;
 
-    // Check if movies is an array before mapping
-    if (!Array.isArray(movies)) {
-        return <p>No movies found</p>;
-    }
-
     return (
         <div className="App">
             <h1>App</h1>
             <TitleById />
             {movies.map(movie => (
                 <div key={movie.id}>
-                    <h2>{movie.title} ({movie.year})</h2>
+                    <h2>{movie.l} ({movie.y})</h2>
+                    <img src={movie.i.imageUrl} alt={movie.l} width={100} />
                 </div>
             ))}
         </div>
