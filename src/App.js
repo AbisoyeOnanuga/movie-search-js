@@ -3,7 +3,7 @@ import TitleById from './components/TitleById';
 import axios from 'axios';
 
 const App = () => {
-    const [movies, setMovies] = useState([]);
+    const [movies, setMovies] = useState(null); // Initialize as null
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -19,6 +19,7 @@ const App = () => {
 
         try {
             const response = await axios.request(options);
+            console.log(response.data); // Log the response to check its structure
             setMovies(response.data);
             setLoading(false);
         } catch (error) {
@@ -33,6 +34,11 @@ const App = () => {
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error}</p>;
+
+    // Check if movies is an array before mapping
+    if (!Array.isArray(movies)) {
+        return <p>No movies found</p>;
+    }
 
     return (
         <div className="App">
