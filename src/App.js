@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import TitleById from './components/TitleById';
 import axios from 'axios';
+import './App.css'; // Import the CSS file
 
 const App = () => {
     const [movies, setMovies] = useState([]);
@@ -39,12 +40,15 @@ const App = () => {
         <div className="App">
             <h1>App</h1>
             <TitleById />
-            {movies.map(movie => (
-                <div key={movie.id}>
-                    <h2>{movie.l} ({movie.y})</h2>
-                    <img src={movie.i.imageUrl} alt={movie.l} width={100} />
-                </div>
-            ))}
+            <div className="movies-grid">
+                {movies.map(movie => (
+                    <div key={movie.id} className="movie-card">
+                        <img src={movie.i.imageUrl} alt={movie.l} />
+                        <h2>{movie.l} ({movie.y})</h2>
+                        <p>{movie.s}</p>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 }
