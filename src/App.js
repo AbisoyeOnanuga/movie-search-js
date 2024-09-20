@@ -7,6 +7,7 @@ const App = () => {
     const [movies, setMovies] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [darkMode, setDarkMode] = useState(false);
 
     const searchMovies = async (title) => {
         const options = {
@@ -33,11 +34,22 @@ const App = () => {
         searchMovies('spiderman');
     }, []);
 
+    useEffect(() => {
+        document.body.className = darkMode ? 'dark-mode' : 'light-mode';
+    }, [darkMode]);
+
+    const toggleTheme = () => {
+        setDarkMode(!darkMode);
+    };
+
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error}</p>;
 
     return (
         <div className="App">
+            <button className={`theme-toggle-button ${darkMode ? 'dark' : ''}`} onClick={toggleTheme}>
+                {darkMode ? 'Light Mode' : 'Dark Mode'}
+            </button>
             <h1>App</h1>
             <TitleById />
             <div className="movies-grid">
