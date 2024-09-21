@@ -56,7 +56,7 @@ const App = () => {
             <button className={`theme-toggle-button ${darkMode ? 'dark' : ''}`} onClick={toggleTheme}>
                 {darkMode ? 'Light Mode' : 'Dark Mode'}
             </button>
-            <h1>App</h1>
+            <h1>Movie Search</h1>
             <TitleById />
             <div className="movies-grid">
                 {movies.map(movie => (
