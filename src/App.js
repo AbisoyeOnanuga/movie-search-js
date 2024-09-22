@@ -4,30 +4,28 @@ import axios from 'axios';
 import './App.css'; // Import the CSS file
 
 const App = () => {
-    const [movies, setMovies] = useState([]);
+    const [taglines, setTaglines] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [darkMode, setDarkMode] = useState(false);
 
-    const searchMovies = async (title) => {
+    const fetchTaglines = async (tconst) => {
         const options = {
             method: 'GET',
-            url: 'https://movie-database-alternative.p.rapidapi.com/',
+            url: 'https://imdb-com.p.rapidapi.com/title/get-taglines',
             params: {
-                s: title,
-                r: 'json',
-                page: '1'
+                tconst: tconst
             },
             headers: {
                 'x-rapidapi-key': 'f2bbb5b1a3msh7d83c14ad42bc40p1625f7jsn1b8d7d32e5a8',
-                'x-rapidapi-host': 'movie-database-alternative.p.rapidapi.com'
+                'x-rapidapi-host': 'imdb-com.p.rapidapi.com'
             }
         };
 
         try {
             const response = await axios.request(options);
             console.log(response.data); // Log the response to check its structure
-            setMovies(response.data.Search); // Access the 'Search' array from the response
+            setTaglines(response.data.taglines); // Access the 'taglines' array from the response
             setLoading(false);
         } catch (error) {
             setError(error.message);
@@ -36,7 +34,7 @@ const App = () => {
     };
 
     useEffect(() => {
-        searchMovies('Avengers Endgame');
+        fetchTaglines('tt0120338'); // Example tconst for demonstration
     }, []);
 
     useEffect(() => {
@@ -57,11 +55,10 @@ const App = () => {
             </button>
             <h1>App</h1>
             <TitleById />
-            <div className="movies-grid">
-                {movies.map(movie => (
-                    <div key={movie.imdbID} className="movie-card">
-                        <img src={movie.Poster} alt={movie.Title} />
-                        <h2>{movie.Title} ({movie.Year})</h2>
+            <div className="taglines">
+                {taglines.map((tagline, index) => (
+                    <div key={index} className="tagline-card">
+                        <p>{tagline}</p>
                     </div>
                 ))}
             </div>
