@@ -34,16 +34,16 @@ body.dark-mode {
     background-color: #e50914; /* Netflix Red */
 }
 
-.movies-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+.taglines {
+    display: flex;
+    flex-direction: column;
     gap: 16px;
     padding: 16px;
     width: 100%;
     max-width: 1200px;
 }
 
-.movie-card {
+.tagline-card {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     overflow: hidden;
@@ -53,33 +53,12 @@ body.dark-mode {
     transition: transform 0.3s ease;
 }
 
-.movie-card img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px 10px 0 0;
-}
-
-.movie-card h2 {
-    font-size: 1.2em;
-    margin: 12px 0;
-    font-weight: 600;
-}
-
-.movie-card p {
-    font-size: 0.9em;
-    color: #666;
-}
-
-.movie-card:hover {
+.tagline-card:hover {
     transform: scale(1.05);
 }
 
-/* Dark mode styles for movie card */
-body.dark-mode .movie-card {
+/* Dark mode styles for tagline card */
+body.dark-mode .tagline-card {
     background-color: #333;
     color: #fff;
-}
-
-body.dark-mode .movie-card p {
-    color: #ccc;
 }
