@@ -46,6 +46,11 @@ const App = () => {
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error}</p>;
 
+    // Add a conditional check to ensure `movies` is defined and is an array
+    if (!Array.isArray(movies)) {
+        return <p>No movies found.</p>;
+    }
+
     return (
         <div className="App">
             <button className={`theme-toggle-button ${darkMode ? 'dark' : ''}`} onClick={toggleTheme}>
