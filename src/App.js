@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import TitleById from './components/TitleById';
 import axios from 'axios';
 import './App.css'; // Import the CSS file
+import searchIcon from './search.svg';
 
 const App = () => {
     const [movies, setMovies] = useState([]);
@@ -56,8 +57,13 @@ const App = () => {
             <button className={`theme-toggle-button ${darkMode ? 'dark' : ''}`} onClick={toggleTheme}>
                 {darkMode ? 'Light Mode' : 'Dark Mode'}
             </button>
-            <h1>Movie Search</h1>
+            <h1>Movie Land</h1>
             <TitleById />
+            <div>
+                <input 
+                    placeholder="search for movies"
+                />
+            </div>
             <div className="movies-grid">
                 {movies.map(movie => (
                     <div key={movie.node.entity.id} className="movie-card">
