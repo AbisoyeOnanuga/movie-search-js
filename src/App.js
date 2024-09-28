@@ -62,6 +62,12 @@ const App = () => {
             <div>
                 <input 
                     placeholder="search for movies"
+                    value="{}"
+                    onChange={() => {}}
+                />
+                <img 
+                    src={searchIcon}
+                    alt="search"
                 />
             </div>
             <div className="movies-grid">
