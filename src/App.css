@@ -33,6 +33,48 @@ body.dark-mode {
     background-color: #e50914; /* Netflix Red */
 }
 
+.search-bar {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.search-bar input {
+    width: 300px;
+    padding: 10px;
+    border-radius: 5px 0 0 5px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+    outline: none;
+}
+
+.search-bar input:focus {
+    border-color: #1f8ef1; /* Amazon Prime Blue */
+}
+
+.search-bar .search-icon {
+    width: 40px;
+    height: 40px;
+    background-color: #1f8ef1; /* Amazon Prime Blue */
+    padding: 8px;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+}
+
+body.dark-mode .search-bar input {
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #444;
+}
+
+body.dark-mode .search-bar input:focus {
+    border-color: #e50914; /* Netflix Red */
+}
+
+body.dark-mode .search-bar .search-icon {
+    background-color: #e50914; /* Netflix Red */
+}
+
 .movies-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
