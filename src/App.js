@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import TitleById from './components/TitleById';
 import axios from 'axios';
+import searchIcon from './search.svg'; // Import the search icon
 import './App.css'; // Import the CSS file
-import searchIcon from './search.svg';
 
 const App = () => {
     const [movies, setMovies] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [darkMode, setDarkMode] = useState(false);
+    const [searchTerm, setSearchTerm] = useState('Titanic'); // Default search term
 
-    const searchMovies = async (searchTerm) => {
+    const searchMovies = async (term) => {
         const options = {
             method: 'GET',
             url: 'https://imdb-com.p.rapidapi.com/search',
-            params: { searchTerm: searchTerm },
+            params: { searchTerm: term },
             headers: {
                 'x-rapidapi-key': 'f2bbb5b1a3msh7d83c14ad42bc40p1625f7jsn1b8d7d32e5a8',
                 'x-rapidapi-host': 'imdb-com.p.rapidapi.com'
@@ -33,8 +33,8 @@ const App = () => {
     };
 
     useEffect(() => {
-        searchMovies('Titanic'); // Example search term for demonstration
-    }, []);
+        searchMovies(searchTerm); // Initial search term
+    }, [searchTerm]);
 
     useEffect(() => {
         document.body.className = darkMode ? 'dark-mode' : 'light-mode';
@@ -42,6 +42,10 @@ const App = () => {
 
     const toggleTheme = () => {
         setDarkMode(!darkMode);
+    };
+
+    const handleSearchInput = (e) => {
+        setSearchTerm(e.target.value);
     };
 
     if (loading) return <p>Loading...</p>;
@@ -57,17 +61,17 @@ const App = () => {
             <button className={`theme-toggle-button ${darkMode ? 'dark' : ''}`} onClick={toggleTheme}>
                 {darkMode ? 'Light Mode' : 'Dark Mode'}
             </button>
-            <h1>Movie Land</h1>
-            <TitleById />
-            <div>
+            <h1>App</h1>
+            <div className="search-bar">
                 <input 
-                    placeholder="search for movies"
-                    value="{}"
-                    onChange={() => {}}
+                    placeholder="Search for movies"
+                    value={searchTerm}
+                    onChange={handleSearchInput}
                 />
                 <img 
                     src={searchIcon}
                     alt="search"
+                    className="search-icon"
                 />
             </div>
             <div className="movies-grid">
