@@ -9,6 +9,8 @@ const App = () => {
     const [error, setError] = useState(null);
     const [darkMode, setDarkMode] = useState(false);
     const [searchTerm, setSearchTerm] = useState('Titanic'); // Default search term
+    const [showSearch, setShowSearch] = useState(false);
+    const [timeoutId, setTimeoutId] = useState(null);
 
     const searchMovies = async (term) => {
         const options = {
@@ -46,6 +48,18 @@ const App = () => {
 
     const handleSearchInput = (e) => {
         setSearchTerm(e.target.value);
+        resetTimeout();
+    };
+
+    const handleSearchIconClick = () => {
+        setShowSearch(true);
+        resetTimeout();
+    };
+
+    const resetTimeout = () => {
+        if (timeoutId) clearTimeout(timeoutId);
+        const newTimeoutId = setTimeout(() => setShowSearch(false), 5000); // 5 seconds of inactivity
+        setTimeoutId(newTimeoutId);
     };
 
     if (loading) return <p>Loading...</p>;
@@ -62,16 +76,18 @@ const App = () => {
                 {darkMode ? 'Light Mode' : 'Dark Mode'}
             </button>
             <h1>App</h1>
-            <div className="search-bar">
+            <div className={`search-bar ${showSearch ? 'active' : ''}`}>
                 <input 
-                    placeholder="Search for movies"
+                    placeholder="Titles, people, genres"
                     value={searchTerm}
                     onChange={handleSearchInput}
+                    className="search-input"
                 />
                 <img 
                     src={searchIcon}
                     alt="search"
                     className="search-icon"
+                    onClick={handleSearchIconClick}
                 />
             </div>
             <div className="movies-grid">
