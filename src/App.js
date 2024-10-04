@@ -8,11 +8,13 @@ const App = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [darkMode, setDarkMode] = useState(false);
-    const [searchTerm, setSearchTerm] = useState('Titanic'); // Default search term
+    const [searchTerm, setSearchTerm] = useState('');
     const [showSearch, setShowSearch] = useState(false);
     const [timeoutId, setTimeoutId] = useState(null);
 
     const searchMovies = async (term) => {
+        if (!term) return; // Avoid making a request if the search term is empty
+
         const options = {
             method: 'GET',
             url: 'https://imdb-com.p.rapidapi.com/search',
@@ -35,7 +37,9 @@ const App = () => {
     };
 
     useEffect(() => {
-        searchMovies(searchTerm); // Initial search term
+        if (searchTerm) {
+            searchMovies(searchTerm); // Initial search term
+        }
     }, [searchTerm]);
 
     useEffect(() => {
@@ -75,13 +79,14 @@ const App = () => {
             <button className={`theme-toggle-button ${darkMode ? 'dark' : ''}`} onClick={toggleTheme}>
                 {darkMode ? 'Light Mode' : 'Dark Mode'}
             </button>
-            <h1>Movie Land</h1>
+            <h1>App</h1>
             <div className={`search-bar ${showSearch ? 'active' : ''}`}>
                 <input 
                     placeholder="Titles, people, genres"
                     value={searchTerm}
                     onChange={handleSearchInput}
                     className="search-input"
+                    onFocus={resetTimeout}
                 />
                 <img 
                     src={searchIcon}
