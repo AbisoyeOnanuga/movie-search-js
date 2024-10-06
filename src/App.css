@@ -1,3 +1,4 @@
+/* App.css */
 body.light-mode {
     background-color: #f5f5f5;
     color: #333;
@@ -44,7 +45,6 @@ body.dark-mode {
 .search-bar .search-icon {
     width: 30px;
     height: 30px;
-    margin-right: 10px;
     cursor: pointer;
     transition: all 0.5s ease;
 }
@@ -70,6 +70,19 @@ body.dark-mode {
 
 .search-bar .search-input:focus {
     border-color: #e50914; /* Netflix Red */
+}
+
+.search-bar .search-button {
+    display: none;
+}
+
+.search-bar.active .search-button {
+    display: inline-block;
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 0;
+    margin-left: -40px; /* Adjust to fit the search icon inside the input */
 }
 
 body.dark-mode .search-bar .search-input {
