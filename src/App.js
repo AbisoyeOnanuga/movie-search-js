@@ -5,16 +5,16 @@ import './App.css'; // Import the CSS file
 
 const App = () => {
     const [movies, setMovies] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [darkMode, setDarkMode] = useState(false);
-    const [searchTerm, setSearchTerm] = useState('');
+    const [searchTerm, setSearchTerm] = useState(''); // Start with empty search term
     const [showSearch, setShowSearch] = useState(false);
     const [timeoutId, setTimeoutId] = useState(null);
 
     const searchMovies = async (term) => {
-        if (!term) return; // Avoid making a request if the search term is empty
-
+        if (!term) return; // Prevent making a request if the search term is empty
+        setLoading(true);
         const options = {
             method: 'GET',
             url: 'https://imdb-com.p.rapidapi.com/search',
@@ -38,7 +38,7 @@ const App = () => {
 
     useEffect(() => {
         if (searchTerm) {
-            searchMovies(searchTerm); // Initial search term
+            searchMovies(searchTerm); // Only search if there's a term
         }
     }, [searchTerm]);
 
@@ -60,6 +60,13 @@ const App = () => {
         resetTimeout();
     };
 
+    const handleSearchSubmit = (e) => {
+        if (e.key === 'Enter') {
+            searchMovies(searchTerm);
+            resetTimeout();
+        }
+    };
+
     const resetTimeout = () => {
         if (timeoutId) clearTimeout(timeoutId);
         const newTimeoutId = setTimeout(() => setShowSearch(false), 5000); // 5 seconds of inactivity
@@ -79,20 +86,20 @@ const App = () => {
             <button className={`theme-toggle-button ${darkMode ? 'dark' : ''}`} onClick={toggleTheme}>
                 {darkMode ? 'Light Mode' : 'Dark Mode'}
             </button>
-            <h1>App</h1>
+            <h1>Movie Land</h1>
             <div className={`search-bar ${showSearch ? 'active' : ''}`}>
-                <input 
-                    placeholder="Titles, people, genres"
-                    value={searchTerm}
-                    onChange={handleSearchInput}
-                    className="search-input"
-                    onFocus={resetTimeout}
-                />
                 <img 
                     src={searchIcon}
                     alt="search"
                     className="search-icon"
                     onClick={handleSearchIconClick}
+                />
+                <input 
+                    placeholder="Titles, people, genres"
+                    value={searchTerm}
+                    onChange={handleSearchInput}
+                    onKeyDown={handleSearchSubmit}
+                    className="search-input"
                 />
             </div>
             <div className="movies-grid">
