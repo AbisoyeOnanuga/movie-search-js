@@ -61,7 +61,7 @@ const App = () => {
     };
 
     const handleSearchSubmit = (e) => {
-        if (e.key === 'Enter') {
+        if (e.key === 'Enter' || e.type === 'click') {
             searchMovies(searchTerm);
             resetTimeout();
         }
@@ -101,6 +101,9 @@ const App = () => {
                     onKeyDown={handleSearchSubmit}
                     className="search-input"
                 />
+                <button onClick={handleSearchSubmit} className="search-button">
+                    <img src={searchIcon} alt="search" />
+                </button>
             </div>
             <div className="movies-grid">
                 {movies.map(movie => (
