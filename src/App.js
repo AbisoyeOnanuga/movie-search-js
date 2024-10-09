@@ -10,7 +10,7 @@ const App = () => {
     const [darkMode, setDarkMode] = useState(false);
     const [searchTerm, setSearchTerm] = useState(''); // Start with empty search term
     const [showSearch, setShowSearch] = useState(false);
-    const [timeoutId, setTimeoutId] = useState(null);
+    const [debounceTimeout, setDebounceTimeout] = useState(null);
 
     const searchMovies = async (term) => {
         if (!term) return; // Prevent making a request if the search term is empty
@@ -52,25 +52,13 @@ const App = () => {
 
     const handleSearchInput = (e) => {
         setSearchTerm(e.target.value);
-        resetTimeout();
+        if (debounceTimeout) clearTimeout(debounceTimeout);
+        const newTimeoutId = setTimeout(() => searchMovies(e.target.value), 500); // 500ms debounce delay
+        setDebounceTimeout(newTimeoutId);
     };
 
     const handleSearchIconClick = () => {
         setShowSearch(true);
-        resetTimeout();
-    };
-
-    const handleSearchSubmit = (e) => {
-        if (e.key === 'Enter' || e.type === 'click') {
-            searchMovies(searchTerm);
-            resetTimeout();
-        }
-    };
-
-    const resetTimeout = () => {
-        if (timeoutId) clearTimeout(timeoutId);
-        const newTimeoutId = setTimeout(() => setShowSearch(false), 5000); // 5 seconds of inactivity
-        setTimeoutId(newTimeoutId);
     };
 
     if (loading) return <p>Loading...</p>;
@@ -98,12 +86,9 @@ const App = () => {
                     placeholder="Titles, people, genres"
                     value={searchTerm}
                     onChange={handleSearchInput}
-                    onKeyDown={handleSearchSubmit}
                     className="search-input"
+                    autoFocus={showSearch}
                 />
-                <button onClick={handleSearchSubmit} className="search-button">
-                    <img src={searchIcon} alt="search" />
-                </button>
             </div>
             <div className="movies-grid">
                 {movies.map(movie => (
