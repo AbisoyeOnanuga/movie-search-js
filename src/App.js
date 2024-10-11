@@ -1,4 +1,7 @@
-import React from "react";
+import React from 'react';
+import { useEffect } from 'react';
+
+const API_URL = 'https://graph.imdbapi.dev/v1'
 
 const App = () => {
     return (
