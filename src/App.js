@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import searchIcon from './search.svg';
-import './App.css';
+import searchIcon from './search.svg'; // Import the search icon
+import './App.css'; // Import the CSS file
 
 const App = () => {
     const [movies, setMovies] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [darkMode, setDarkMode] = useState(false);
-    const [searchTerm, setSearchTerm] = useState('Titanic');
+    const [searchTerm, setSearchTerm] = useState('Titanic'); // Default search term
     const [showSearch, setShowSearch] = useState(false);
     const [timeoutId, setTimeoutId] = useState(null);
 
     const searchMovies = async (term) => {
-        if (!term) return;
+        if (!term) return; // Prevent making a request if the search term is empty
         setLoading(true);
         const options = {
             method: 'GET',
@@ -27,8 +27,8 @@ const App = () => {
 
         try {
             const response = await axios.request(options);
-            console.log(response.data);
-            setMovies(response.data.data.mainSearch.edges);
+            console.log(response.data); // Log the response to check its structure
+            setMovies(response.data.data.mainSearch.edges); // Access the 'edges' array from the response
             setLoading(false);
         } catch (error) {
             setError(error.message);
@@ -38,7 +38,7 @@ const App = () => {
 
     useEffect(() => {
         if (searchTerm) {
-            searchMovies(searchTerm);
+            searchMovies(searchTerm); // Only search if there's a term
         }
     }, [searchTerm]);
 
@@ -69,7 +69,7 @@ const App = () => {
 
     const resetTimeout = () => {
         if (timeoutId) clearTimeout(timeoutId);
-        const newTimeoutId = setTimeout(() => setShowSearch(false), 5000);
+        const newTimeoutId = setTimeout(() => setShowSearch(false), 5000); // 5 seconds of inactivity
         setTimeoutId(newTimeoutId);
     };
 
@@ -83,13 +83,13 @@ const App = () => {
             </button>
             <h1>Movie Land</h1>
             <div className={`search-bar ${showSearch ? 'active' : ''}`}>
-                <img
+                <img 
                     src={searchIcon}
                     alt="search"
-                    className={`search-icon ${showSearch ? 'animate' : ''}`}
+                    className="search-icon"
                     onClick={handleSearchIconClick}
                 />
-                <input
+                <input 
                     placeholder="Titles, people, genres"
                     value={searchTerm}
                     onChange={handleSearchInput}
