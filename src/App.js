@@ -20,7 +20,7 @@ const App = () => {
             url: 'https://imdb-com.p.rapidapi.com/search',
             params: { searchTerm: term },
             headers: {
-                'x-rapidapi-key': 'f2bbb5b1a3msh7d83c14ad42bc40p1625f7jsn1b8d7d32e5a8',
+                'x-rapidapi-key': 'your-api-key',
                 'x-rapidapi-host': 'imdb-com.p.rapidapi.com'
             }
         };
@@ -37,10 +37,8 @@ const App = () => {
     };
 
     useEffect(() => {
-        if (searchTerm) {
-            searchMovies(searchTerm); // Only search if there's a term
-        }
-    }, [searchTerm]);
+        searchMovies(searchTerm); // Only search on initial render or when searchTerm changes
+    }, []);
 
     useEffect(() => {
         document.body.className = darkMode ? 'dark-mode' : 'light-mode';
@@ -56,6 +54,7 @@ const App = () => {
     };
 
     const handleSearchIconClick = () => {
+        searchMovies(searchTerm);
         setShowSearch(true);
         resetTimeout();
     };
@@ -101,7 +100,7 @@ const App = () => {
                 {movies.map(movie => (
                     <div key={movie.node.entity.id} className="movie-card">
                         <img src={movie.node.entity.primaryImage?.url} alt={movie.node.entity.titleText.text} />
-                        <h2>{movie.node.entity.titleText.text} ({movie.node.entity.releaseYear.year})</h2>
+                        <h2>{movie.node.entity.titleText.text} ({movie.node.entity.releaseYear?.year || 'N/A'})</h2>
                     </div>
                 ))}
             </div>
