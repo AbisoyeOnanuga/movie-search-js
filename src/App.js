@@ -20,7 +20,7 @@ const App = () => {
             url: 'https://imdb-com.p.rapidapi.com/search',
             params: { searchTerm: term },
             headers: {
-                'x-rapidapi-key': 'your-api-key',
+                'x-rapidapi-key': 'f2bbb5b1a3msh7d83c14ad42bc40p1625f7jsn1b8d7d32e5a8',
                 'x-rapidapi-host': 'imdb-com.p.rapidapi.com'
             }
         };
