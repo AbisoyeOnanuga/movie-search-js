@@ -11,6 +11,7 @@ const App = () => {
     const [searchTerm, setSearchTerm] = useState('Titanic'); // Default search term
     const [showSearch, setShowSearch] = useState(false);
     const [timeoutId, setTimeoutId] = useState(null);
+    const [isSearchActive, setIsSearchActive] = useState(false);
 
     const searchMovies = async (term) => {
         if (!term) return; // Prevent making a request if the search term is empty
@@ -37,7 +38,7 @@ const App = () => {
     };
 
     useEffect(() => {
-        searchMovies(searchTerm); // Only search on initial render or when searchTerm changes
+        searchMovies(searchTerm); // Initial search
     }, []);
 
     useEffect(() => {
@@ -54,9 +55,13 @@ const App = () => {
     };
 
     const handleSearchIconClick = () => {
-        searchMovies(searchTerm);
-        setShowSearch(true);
-        resetTimeout();
+        if (!isSearchActive) {
+            setShowSearch(true);
+            setIsSearchActive(true);
+            resetTimeout();
+        } else {
+            searchMovies(searchTerm);
+        }
     };
 
     const handleSearchSubmit = (e) => {
@@ -68,7 +73,10 @@ const App = () => {
 
     const resetTimeout = () => {
         if (timeoutId) clearTimeout(timeoutId);
-        const newTimeoutId = setTimeout(() => setShowSearch(false), 5000); // 5 seconds of inactivity
+        const newTimeoutId = setTimeout(() => {
+            setShowSearch(false);
+            setIsSearchActive(false);
+        }, 5000); // 5 seconds of inactivity
         setTimeoutId(newTimeoutId);
     };
 
