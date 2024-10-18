@@ -174,7 +174,7 @@ body.dark-mode .movie-card p {
 
 .search-bar .search-input {
     width: 0;
-    padding: 10px 10px 10px 35px; /* Adjusted padding to make space for the search icon */
+    padding: 10px 10px 10px 45px; /* Adjusted padding to make space for the search icon */
     border-radius: 20px;
     border: 2px solid transparent;
     font-size: 1em;
@@ -193,4 +193,9 @@ body.dark-mode .movie-card p {
 
 .search-bar .search-input:focus {
     border-color: #e50914; /* Netflix Red */
+}
+
+.search-bar.active .search-icon {
+    margin-right: 10px;
+    padding-right: 10px;
 }
