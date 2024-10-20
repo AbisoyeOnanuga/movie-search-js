@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import searchIcon from './search.svg'; // Import the search icon
+import searchIconWhite from './search-white.svg'; // Import the white search icon
 import './App.css'; // Import the CSS file
 
 const App = () => {
@@ -91,7 +92,7 @@ const App = () => {
             <h1>Movie Land</h1>
             <div className={`search-bar ${showSearch ? 'active' : ''}`}>
                 <img 
-                    src={searchIcon}
+                    src={darkMode ? searchIconWhite : searchIcon} // Use white icon in dark mode
                     alt="search"
                     className="search-icon"
                     onClick={handleSearchIconClick}
