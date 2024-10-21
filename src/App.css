@@ -91,10 +91,6 @@ body.dark-mode .search-bar .search-input {
     border-color: #444;
 }
 
-body.dark-mode .search-bar.active .search-input {
-    border-color: #e50914; /* Netflix Red */
-}
-
 body.dark-mode .search-bar .search-input:focus {
     border-color: #e50914; /* Netflix Red */
 }
@@ -109,6 +105,7 @@ body.dark-mode .search-bar .search-input:focus {
 }
 
 .movie-card {
+    max-width: 230px; /* Set a maximum width for the movie cards */
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     overflow: hidden;
