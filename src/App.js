@@ -46,6 +46,20 @@ const App = () => {
         document.body.className = darkMode ? 'dark-mode' : 'light-mode';
     }, [darkMode]);
 
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (searchInputRef.current && !searchInputRef.current.contains(event.target)) {
+                setShowSearch(false);
+                setIsSearchActive(false);
+            }
+        };
+    
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
+    
     const toggleTheme = () => {
         setDarkMode(!darkMode);
     };
