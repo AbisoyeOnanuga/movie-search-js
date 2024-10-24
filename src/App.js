@@ -39,26 +39,21 @@ const App = () => {
     };
 
     useEffect(() => {
-        searchMovies(searchTerm); // Initial search
-    }, []);
-
-    useEffect(() => {
         document.body.className = darkMode ? 'dark-mode' : 'light-mode';
     }, [darkMode]);
 
     useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (searchInputRef.current && !searchInputRef.current.contains(event.target)) {
-                setShowSearch(false);
-                setIsSearchActive(false);
-            }
-        };
-    
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, []);
+        searchMovies('Titanic'); // Perform the initial search with the default term
+    }, []); // Empty dependency array to run only once on mount    
+
+    const resetTimeout = () => {
+        if (timeoutId) clearTimeout(timeoutId);
+        const newTimeoutId = setTimeout(() => {
+            setShowSearch(false);
+            setIsSearchActive(false);
+        }, 10000); // 5 seconds of inactivity
+        setTimeoutId(newTimeoutId);
+    };    
     
     const toggleTheme = () => {
         setDarkMode(!darkMode);
@@ -84,15 +79,6 @@ const App = () => {
             searchMovies(searchTerm);
             resetTimeout();
         }
-    };
-
-    const resetTimeout = () => {
-        if (timeoutId) clearTimeout(timeoutId);
-        const newTimeoutId = setTimeout(() => {
-            setShowSearch(false);
-            setIsSearchActive(false);
-        }, 5000); // 5 seconds of inactivity
-        setTimeoutId(newTimeoutId);
     };
 
     if (loading) return <p>Loading...</p>;
