@@ -1,11 +1,19 @@
+import { useState, useEffect } from 'react';
 import './App.css';
 
 const App = () => {
-  const name = 'Username';
-  const isNameShowing = true;
+  const [counter, setCounter] = useState(0);
+
+  useEffect(() => {
+    alert('Reload')
+    setCounter(10);
+  }, [counter]);
+
   return (
     <div className="App">
-      <h1>Hello, Buenos Dias {isNameShowing ? name : 'someone'}!</h1>
+      <button onClick={() => setCounter((prevCount) => prevCount -1)}>-</button>
+      <h1>{counter}</h1>
+      <button onClick={() => setCounter((prevCount) => prevCount +1)}>+</button>
     </div>
   );
 }
