@@ -91,9 +91,9 @@ const App = () => {
                 {darkMode ? 'Light Mode' : 'Dark Mode'}
             </button>
             <h1>Movie Land</h1>
-            <div className={`search-bar ${showSearch ? 'active' : ''}`}>
+            <div className={`search-bar ${showSearch ? 'active' : ''}`} ref={searchInputRef}>
                 <img 
-                    src={darkMode ? searchIconWhite : searchIcon} // Use white icon in dark mode
+                    src={darkMode ? searchIconWhite : searchIcon}
                     alt="search"
                     className="search-icon"
                     onClick={handleSearchIconClick}
@@ -111,8 +111,13 @@ const App = () => {
                     <MovieCard key={movie.node.entity.id} movie={movie} />
                 ))}
             </div>
+            <footer>
+                <p className="disclaimer">
+                    Disclaimer: The API used in this application has a rate limit of 500 requests per month and 5 requests per second.
+                </p>
+            </footer>
         </div>
-    );
+    );    
 }
 
 export default App;

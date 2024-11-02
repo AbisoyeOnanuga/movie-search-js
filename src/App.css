@@ -163,3 +163,14 @@ body.dark-mode .movie-card p {
     margin-right: 10px;
     padding-right: 10px;
 }
+
+footer {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 0.8em;
+    color: #666;
+}
+
+footer .disclaimer {
+    margin: 10px 0;
+}
