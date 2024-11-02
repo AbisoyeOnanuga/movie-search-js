@@ -1,6 +1,7 @@
 {
-  "name": "sony-walkman-js",
+  "name": "movie-search-js",
   "version": "0.1.0",
+  "description": "A movie search website",
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.11.8",
