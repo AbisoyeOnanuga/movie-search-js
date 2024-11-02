@@ -91,7 +91,7 @@ const App = () => {
                 {darkMode ? 'Light Mode' : 'Dark Mode'}
             </button>
             <h1>Movie Land</h1>
-            <div className={`search-bar ${showSearch ? 'active' : ''}`} ref={searchInputRef}>
+            <div className={`search-bar ${showSearch ? 'active' : ''}`}>
                 <img 
                     src={darkMode ? searchIconWhite : searchIcon}
                     alt="search"
