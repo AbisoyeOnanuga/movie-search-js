@@ -53,7 +53,7 @@ const App = () => {
             setIsSearchActive(false);
         }, 10000); // 5 seconds of inactivity
         setTimeoutId(newTimeoutId);
-    };    
+    };
     
     const toggleTheme = () => {
         setDarkMode(!darkMode);
