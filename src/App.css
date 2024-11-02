@@ -104,39 +104,6 @@ body.dark-mode .search-bar .search-input:focus {
     max-width: 1200px;
 }
 
-.movie-card {
-    max-width: 230px; /* Set a maximum width for the movie cards */
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
-    background-color: #fff;
-    text-align: center;
-    padding: 16px;
-    transition: transform 0.3s ease;
-}
-
-.movie-card:hover {
-    transform: scale(1.05);
-}
-
-.movie-card img {
-    width: 100%;
-    height: 300px; /* Set a fixed height for the images */
-    object-fit: cover; /* Ensure the images cover the container without distorting */
-    border-radius: 10px 10px 0 0;
-}
-
-.movie-card h2 {
-    font-size: 1.2em;
-    margin: 12px 0;
-    font-weight: 600;
-}
-
-.movie-card p {
-    font-size: 0.9em;
-    color: #666;
-}
-
 /* Dark mode styles for movie card */
 body.dark-mode .movie-card {
     background-color: #333;

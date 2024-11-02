@@ -3,6 +3,7 @@ import axios from 'axios';
 import searchIcon from './search.svg'; // Import the search icon
 import searchIconWhite from './search-white.svg'; // Import the white search icon
 import './App.css'; // Import the CSS file
+import MovieCard from './MovieCard'; // Import the MovieCard component
 
 const App = () => {
     const [movies, setMovies] = useState([]);
@@ -107,10 +108,7 @@ const App = () => {
             </div>
             <div className="movies-grid">
                 {movies.map(movie => (
-                    <div key={movie.node.entity.id} className="movie-card">
-                        <img src={movie.node.entity.primaryImage?.url} alt={movie.node.entity.titleText.text} />
-                        <h2>{movie.node.entity.titleText.text} ({movie.node.entity.releaseYear?.year || 'N/A'})</h2>
-                    </div>
+                    <MovieCard key={movie.node.entity.id} movie={movie} />
                 ))}
             </div>
         </div>
