@@ -23,7 +23,7 @@ const App = () => {
         try {
             const response = await axios.request(options);
             console.log(response.data); // Log the response to check its structure
-            setMovies(response.data.d); // Access the appropriate data array from the response
+            setMovies(response.data.data.mainSearch.edges); // Access the 'edges' array from the response
             setLoading(false);
         } catch (error) {
             setError(error.message);
@@ -60,9 +60,9 @@ const App = () => {
             <TitleById />
             <div className="movies-grid">
                 {movies.map(movie => (
-                    <div key={movie.id} className="movie-card">
-                        <img src={movie.Poster} alt={movie.Title} />
-                        <h2>{movie.Title} ({movie.Year})</h2>
+                    <div key={movie.node.entity.id} className="movie-card">
+                        <img src={movie.node.entity.primaryImage?.url} alt={movie.node.entity.titleText.text} />
+                        <h2>{movie.node.entity.titleText.text} ({movie.node.entity.releaseYear.year})</h2>
                     </div>
                 ))}
             </div>
