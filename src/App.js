@@ -5,6 +5,7 @@ import searchIconWhite from './search-white.svg'; // Import the white search ico
 import './App.css'; // Import the CSS file
 import MovieCard from './MovieCard'; // Import the MovieCard component
 import Spinner from './Spinner'; // Import the Spinner component
+import ErrorMessage from './ErrorMessage'; // Import the ErrorMessage component
 
 const App = () => {
     const [movies, setMovies] = useState([]);
@@ -84,7 +85,7 @@ const App = () => {
     };
 
     if (loading) return <Spinner />;
-    if (error) return <p>Error: {error}</p>;
+    if (error) return <ErrorMessage message={`Error: ${error}`} onRetry={() => searchMovies(searchTerm)} />;
 
     return (
         <div className="App">
