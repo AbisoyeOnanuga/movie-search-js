@@ -4,6 +4,7 @@ import searchIcon from './search.svg'; // Import the search icon
 import searchIconWhite from './search-white.svg'; // Import the white search icon
 import './App.css'; // Import the CSS file
 import MovieCard from './MovieCard'; // Import the MovieCard component
+import Spinner from './Spinner'; // Import the Spinner component
 
 const App = () => {
     const [movies, setMovies] = useState([]);
@@ -82,7 +83,7 @@ const App = () => {
         }
     };
 
-    if (loading) return <p>Loading...</p>;
+    if (loading) return <Spinner />;
     if (error) return <p>Error: {error}</p>;
 
     return (
