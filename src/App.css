@@ -21,6 +21,7 @@ body.dark-mode {
     position: fixed;
     top: 20px;
     right: 20px;
+    z-index: 1000;
     padding: 10px 20px;
     background-color: #1f8ef1; /* Amazon Prime Blue */
     border: none;
