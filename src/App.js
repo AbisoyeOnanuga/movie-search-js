@@ -16,14 +16,15 @@ const App = () => {
     const [showSearch, setShowSearch] = useState(false);
     const [timeoutId, setTimeoutId] = useState(null);
     const [isSearchActive, setIsSearchActive] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
 
-    const searchMovies = async (term) => {
+    const searchMovies = async (term, page = 1) => {
         if (!term) return; // Prevent making a request if the search term is empty
         setLoading(true);
         const options = {
             method: 'GET',
             url: 'https://imdb-com.p.rapidapi.com/search',
-            params: { searchTerm: term },
+            params: { searchTerm: term, page: page },
             headers: {
                 'x-rapidapi-key': 'f2bbb5b1a3msh7d83c14ad42bc40p1625f7jsn1b8d7d32e5a8',
                 'x-rapidapi-host': 'imdb-com.p.rapidapi.com'
@@ -92,7 +93,9 @@ const App = () => {
             <button className={`theme-toggle-button ${darkMode ? 'dark' : ''}`} onClick={toggleTheme}>
                 {darkMode ? 'Light Mode' : 'Dark Mode'}
             </button>
-            <h1>Movie Land</h1>
+            <div className="header">
+                <h1>Movie Land</h1>
+            </div>
             <div className={`search-bar ${showSearch ? 'active' : ''}`}>
                 <img 
                     src={darkMode ? searchIconWhite : searchIcon}

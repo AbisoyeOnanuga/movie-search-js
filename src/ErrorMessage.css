@@ -1,0 +1,22 @@
+.error-message {
+    background-color: #f8d7da; /* Light red background */
+    color: #721c24; /* Dark red text */
+    padding: 15px;
+    border: 1px solid #f5c6cb; /* Border color */
+    border-radius: 5px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.error-message button {
+    background-color: #007bff; /* Blue button */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.error-message button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+} 
